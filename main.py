@@ -10,7 +10,7 @@ Strategy (long only, all-in/all-out, at most one order per bar):
   A full round trip costs roughly 30-40 bps in fees, slippage and price
   impact, so the bot trades rarely and only on strength:
   - Entry: the close clears the highest close of the prior 180 bars by at
-    least 22 bps while sitting above the 240-bar EMA (+10 bps buffer) --
+    least 21 bps while sitting above the 240-bar EMA (+10 bps buffer) --
     a decisive breakout in an uptrend, not a marginal poke at resistance.
   - Exit: take profit at +120 bps over the effective entry price (the
     position cost per unit, fees included), with three backstops: a
@@ -33,7 +33,9 @@ SYMBOL = "CBBTC"
 ENTRY_BARS = 180        # Donchian lookback for the breakout high
 EMA_SPAN = 240          # trend filter / regime exit EMA
 EMA_BUFFER_BPS = 10     # close must clear the EMA by this much to enter
-MIN_BREAK_BPS = 22      # close must clear the breakout high by this much
+MIN_BREAK_BPS = 21      # close must clear the breakout high by this much
+                        # (dev window: real breakout +28 bps, rejected fakeout
+                        # +13 bps, so 21 keeps both on their original side)
 TRAIL_BPS = 80          # trailing stop under the peak close since entry
 STOP_BPS = 140          # stop loss under the effective entry price
 TP_BPS = 120            # take profit over the effective entry price
